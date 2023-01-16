@@ -6,8 +6,14 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:16 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/01/14 17:19:07 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/01/16 12:53:30 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+int main(int argc, char **argv)
+{
+    
+    
+}
