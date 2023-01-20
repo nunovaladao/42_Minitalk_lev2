@@ -6,37 +6,51 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:34 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/01/18 17:07:40 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:05:28 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void signal_handler(int sig)
+void server_handler(int sig, siginfo_t *siginfo, void *nothing)
 {
     if (sig == SIGUSR1)
+    {
+        kill(getpid(), SIGUSR1);
         puts("0");
+    }
     else if (sig == SIGUSR2)
+    {    
+        kill(getpid(), SIGUSR2);
         puts("1");
+    }
+
 }
 
-int main()
+int main(void)
 {
-    pid_t pid = getpid();
+    struct sigaction signal1;
+    struct sigaction signal2;
+    pid_t pid;
     
-    struct sigaction signal;
+    pid = getpid();
+    printf("PID: %d\n", pid); //ft_printf
     
-    sigaction(SIGUSR1, &signal, NULL);
-    sigaction(SIGUSR2, &signal, NULL);
+    sigemptyset(&signal1.sa_mask);
+    sigemptyset(&signal2.sa_mask);
+
+    signal1.sa_flags = SA_SIGINFO;
+    signal2.sa_flags = SA_SIGINFO;
     
-    signal.sa_handler = signal_handler;
+    signal1.sa_sigaction = server_handler;
+    signal2.sa_sigaction = server_handler;
     
-    kill(getpid(), SIGUSR1);
-    kill(getpid(), SIGUSR2);
+    if ((sigaction(SIGUSR1, &signal1, 0)) == -1)
+        printf("Error Signal\n"); //ft_printf
+    if ((sigaction(SIGUSR2, &signal2, 0)) == -1)
+        printf("Error Signal\n"); //ft_printf
     
     while (1)
-    {
         pause();
-    }
-    
+    return (0);
 }
