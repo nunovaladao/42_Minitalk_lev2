@@ -34,35 +34,29 @@ void	send_mensage(pid_t pid, char *mensage)
 	}
 }
 
-void client_handler(int sig, siginfo_t *siginfo, void *nothing)
+void	client_handler(int sig, siginfo_t *siginfo, void *nothing)
 {
-    (void)sig;
-    (void)siginfo;
-    (void)nothing;
-    
-    ft_printf("Signal came from Server\n");
+	(void)sig;
+	(void)siginfo;
+	(void)nothing;
+	ft_printf("Signal came from Server\n");
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    struct sigaction signal;
-    
-    sigemptyset(&signal.sa_mask);
-    signal.sa_flags = SA_SIGINFO;
-    signal.sa_sigaction = client_handler;
-    
-    if ((sigaction(SIGUSR1, &signal, 0)) == -1)
-        ft_printf("Error Client Signal\n");
-    if ((sigaction(SIGUSR2, &signal, 0)) == -1)
-        ft_printf("Error Client Signal\n");
+	struct sigaction	signal;
 
-    if (ft_atoi(argv[1]) < 0)
-        ft_printf("PID error!\n");
-    if (argc == 3)
-        send_mensage(ft_atoi(argv[1]), argv[2]);
-    else 
-        ft_printf("Wrong args!\n");
-    /* while (1)
-        pause ();
-    return (0); */
+	sigemptyset(&signal.sa_mask);
+	signal.sa_flags = SA_SIGINFO;
+	signal.sa_sigaction = client_handler;
+	if ((sigaction(SIGUSR1, &signal, 0)) == -1)
+		solve_errors("Error Client Signal\n");
+	if ((sigaction(SIGUSR2, &signal, 0)) == -1)
+		solve_errors("Error Client Signal\n");
+	if (ft_atoi(argv[1]) < 0)
+		solve_errors("PID error!\n");
+	if (argc == 3)
+		send_mensage(ft_atoi(argv[1]), argv[2]);
+	else
+		solve_errors("Wrong args!\n");
 }

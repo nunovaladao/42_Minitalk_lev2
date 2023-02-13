@@ -12,8 +12,8 @@
 
 #include "libft.h"
 
-void errors(char *str)
+void	solve_errors(char *str)
 {
-    ft_printf("%s\n", str);
-    exit(EXIT_FAILURE);
+	ft_printf("%s\n", str);
+	exit(EXIT_FAILURE);
 }

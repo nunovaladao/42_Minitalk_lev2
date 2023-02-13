@@ -93,6 +93,6 @@ char	*get_next_line(int fd);
 char	*ft_gnl_strjoin(char *s1, char *s2);
 char	*ft_gnl_strchr(char *s, int c);
 
-void	errors(char *str);
+void	solve_errors(char *str);
 
 #endif

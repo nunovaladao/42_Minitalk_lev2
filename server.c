@@ -12,9 +12,9 @@
 
 #include "minitalk.h"
 
-void server_handler(int sig, siginfo_t *siginfo, void *nothing)
+void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
 {
-    static int	bit;
+	static int	bit;
 	static int	i;
 
 	(void)nothing;
@@ -27,32 +27,30 @@ void server_handler(int sig, siginfo_t *siginfo, void *nothing)
 		bit = 0;
 		i = 0;
 	}
-    if (siginfo->si_pid == 0)
-        solve_errors("Error in PID'S client!");
-    if (kill(siginfo->si_pid, SIGUSR1))
-        ft_printf("Error in signal!");
+	if (siginfo->si_pid == 0)
+		solve_errors("Error in PID'S client!");
+	if (kill(siginfo->si_pid, SIGUSR1))
+		solve_errors("Error in signal!");
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    struct sigaction signal;
-    pid_t pid;
-    (void)argv;
+	struct sigaction	signal;
+	pid_t				pid;
 
-    if (argc != 1)
-        ft_printf("Error!");
-    pid = getpid();
-    ft_printf("PID: %d\n", pid);
-    
-    sigemptyset(&signal.sa_mask);
-    signal.sa_flags = SA_SIGINFO;
-    signal.sa_sigaction = server_handler;
-    
-    if ((sigaction(SIGUSR1, &signal, NULL)) == -1)
-        ft_printf("Error Signal: SIGUSR1\n");
-    if ((sigaction(SIGUSR2, &signal, NULL)) == -1)
-        ft_printf("Error Signal: SIGUSR2\n");
-    while (1)
-        pause();
-    return (0);
+	(void)argv;
+	if (argc != 1)
+		solve_errors("Error!");
+	pid = getpid();
+	ft_printf("PID: %d\n", pid);
+	sigemptyset(&signal.sa_mask);
+	signal.sa_flags = SA_SIGINFO;
+	signal.sa_sigaction = server_handler;
+	if ((sigaction(SIGUSR1, &signal, NULL)) == -1)
+		solve_errors("Error Signal: SIGUSR1\n");
+	if ((sigaction(SIGUSR2, &signal, NULL)) == -1)
+		solve_errors("Error Signal: SIGUSR2\n");
+	while (1)
+		pause();
+	return (0);
 }
