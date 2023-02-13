@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   solve_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/14 17:18:30 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/13 15:39:56 by nsoares-         ###   ########.fr       */
+/*   Created: 2023/02/13 15:08:17 by nsoares-          #+#    #+#             */
+/*   Updated: 2023/02/13 15:13:54 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# include <signal.h>
-# include <sys/types.h>
-
-#endif
+void errors(char *str)
+{
+    ft_printf("%s\n", str);
+    exit(EXIT_FAILURE);
+}

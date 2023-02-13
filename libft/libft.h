@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:27:45 by nsoares-          #+#    #+#             */
-/*   Updated: 2022/11/21 15:35:51 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:35:10 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,7 @@ char	*ft_utoa(unsigned int n);
 char	*get_next_line(int fd);
 char	*ft_gnl_strjoin(char *s1, char *s2);
 char	*ft_gnl_strchr(char *s, int c);
+
+void	errors(char *str);
 
 #endif
