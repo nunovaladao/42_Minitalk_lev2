@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:34 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/01/20 16:05:28 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/11 22:14:03 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,42 @@
 
 void server_handler(int sig, siginfo_t *siginfo, void *nothing)
 {
-    if (sig == SIGUSR1)
-    {
-        kill(getpid(), SIGUSR1);
-        puts("0");
-    }
-    else if (sig == SIGUSR2)
-    {    
-        kill(getpid(), SIGUSR2);
-        puts("1");
-    }
+    static int	bit;
+	static int	i;
 
+	(void)siginfo;
+	(void)nothing;
+	if (sig == SIGUSR1)
+		i |= (0x01 << bit);
+	bit++;
+	if (bit == 8)
+	{
+		ft_printf("%c", i);
+		bit = 0;
+		i = 0;
+		kill(siginfo->si_pid, SIGUSR2);
+	}
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
-    struct sigaction signal1;
-    struct sigaction signal2;
+    struct sigaction signal;
     pid_t pid;
-    
-    pid = getpid();
-    printf("PID: %d\n", pid); //ft_printf
-    
-    sigemptyset(&signal1.sa_mask);
-    sigemptyset(&signal2.sa_mask);
+    (void)argv;
 
-    signal1.sa_flags = SA_SIGINFO;
-    signal2.sa_flags = SA_SIGINFO;
+    if (argc != 1)
+        ft_printf("Error!");
+    pid = getpid();
+    ft_printf("PID: %d\n", pid);
     
-    signal1.sa_sigaction = server_handler;
-    signal2.sa_sigaction = server_handler;
+    sigemptyset(&signal.sa_mask);
+    signal.sa_flags = SA_SIGINFO;
+    signal.sa_sigaction = server_handler;
     
-    if ((sigaction(SIGUSR1, &signal1, 0)) == -1)
-        printf("Error Signal\n"); //ft_printf
-    if ((sigaction(SIGUSR2, &signal2, 0)) == -1)
-        printf("Error Signal\n"); //ft_printf
+    if ((sigaction(SIGUSR1, &signal, NULL)) == -1)
+        ft_printf("Error Signal: SIGUSR1\n");
+    if ((sigaction(SIGUSR2, &signal, NULL)) == -1)
+        ft_printf("Error Signal: SIGUSR2\n");
     
     while (1)
         pause();
