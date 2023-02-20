@@ -6,7 +6,7 @@
 #    By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 17:21:32 by nsoares-          #+#    #+#              #
-#    Updated: 2023/02/19 18:14:35 by nsoares-         ###   ########.fr        #
+#    Updated: 2023/02/20 19:28:36 by nsoares-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,13 +57,13 @@ FCLEANED	=	echo "\n$(BOLD_YELLOW)Fclean: $(NO_COLOR)Removed the executables \n"
 
 # __________RULES______________
 
-all: $(SERVER) $(CLIENT)
+all: compilation_start $(SERVER) $(CLIENT)
 
 $(NAME): all 
 
 compilation_start:
 	@ $(COMPILATION_START)
-	@ $(LIBFT)
+	
 
 $(SERVER): $(LIBFT) $(OBJS_SER)
 	@ $(CC) $(CFLAGS) $(SERVER_FILE) $(LIBFT) -o $(SERVER)
@@ -98,4 +98,4 @@ fclean: clean
 
 bonus: $(SERVER_BONUS) $(CLIENT_BONUS)
 		
-re:	fclean all
+re:	fclean all bonus

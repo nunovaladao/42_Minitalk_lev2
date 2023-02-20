@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:34 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/13 17:10:39 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/20 19:13:43 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
 {
@@ -33,16 +33,11 @@ void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
 		solve_errors("Error in signal!");
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	struct sigaction	signal;
-	pid_t				pid;
 
-	(void)argv;
-	if (argc != 1)
-		solve_errors("Error!");
-	pid = getpid();
-	ft_printf("PID: %d\n", pid);
+	ft_printf("PID: %d\n", getpid());
 	sigemptyset(&signal.sa_mask);
 	signal.sa_flags = SA_SIGINFO;
 	signal.sa_sigaction = server_handler;

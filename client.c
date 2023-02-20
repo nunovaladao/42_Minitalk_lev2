@@ -6,11 +6,11 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:17:47 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/19 17:35:59 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/20 19:13:23 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk_bonus.h"
+#include "minitalk.h"
 
 void	send_mensage(pid_t pid, char *mensage)
 {
