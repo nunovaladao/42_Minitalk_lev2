@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/19 17:17:44 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/19 17:35:20 by nsoares-         ###   ########.fr       */
+/*   Created: 2023/01/14 17:18:34 by nsoares-          #+#    #+#             */
+/*   Updated: 2023/02/13 17:10:39 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk_bonus.h"
+#include "minitalk.h"
 
 void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
 {

@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/19 17:17:47 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/19 17:35:59 by nsoares-         ###   ########.fr       */
+/*   Created: 2023/01/14 17:18:16 by nsoares-          #+#    #+#             */
+/*   Updated: 2023/02/13 17:09:26 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk_bonus.h"
+#include "minitalk.h"
 
 void	send_mensage(pid_t pid, char *mensage)
 {
