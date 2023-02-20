@@ -6,40 +6,40 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:17:47 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/20 19:13:23 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/20 19:41:39 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	send_mensage(pid_t pid, char *mensage)
-{
-	unsigned char	c;
-	int				nbr_bits;
+int g_message_count = 0;
 
-	while (*mensage)
+void	send_string(pid_t pid, char *string)
+{
+	char	c;
+	int				bits;
+
+	while (*string)
 	{
-		c = *mensage;
-		nbr_bits = 8;
-		while (nbr_bits--)
+		c = *string;
+		bits = 0;
+		while (bits < 8)
 		{
-			if (c & 0b10000000)
+			if (c & 1 << (7 - bits))
 				kill(pid, SIGUSR1);
 			else
 				kill(pid, SIGUSR2);
-			usleep(50);
-			c <<= 1;
+			usleep(40);
+			bits++;
 		}
-		mensage++;
+		string++;
 	}
 }
 
-void	client_handler(int sig, siginfo_t *siginfo, void *nothing)
+void	client_handler(int sig)
 {
-	(void)sig;
-	(void)siginfo;
-	(void)nothing;
-	ft_printf("Signal came from Server\n");
+	if (sig == SIGUSR1)
+		g_message_count++;
 }
 
 int	main(int argc, char **argv)
@@ -48,15 +48,18 @@ int	main(int argc, char **argv)
 
 	sigemptyset(&signal.sa_mask);
 	signal.sa_flags = SA_SIGINFO;
-	signal.sa_sigaction = client_handler;
+	signal.sa_handler = &client_handler;
 	if ((sigaction(SIGUSR1, &signal, 0)) == -1)
 		solve_errors("Error Client Signal\n");
 	if ((sigaction(SIGUSR2, &signal, 0)) == -1)
 		solve_errors("Error Client Signal\n");
-	if (ft_atoi(argv[1]) < 0)
+	if (!ft_atoi(argv[1]) || ft_atoi(argv[1]) < 0)	
 		solve_errors("PID error!\n");
 	if (argc == 3)
-		send_mensage(ft_atoi(argv[1]), argv[2]);
+	{
+		send_string(ft_atoi(argv[1]), argv[2]);
+		ft_printf("The message has been received [%d] times!\n", g_message_count);
+	}
 	else
-		solve_errors("Wrong args! Put 1 argument and try again!\n");
+		solve_errors("Wrong args!\n");
 }
