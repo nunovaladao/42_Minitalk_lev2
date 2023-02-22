@@ -6,11 +6,11 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:34 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/20 19:13:43 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/21 23:14:38 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk_bonus.h"
+#include "minitalk.h"
 
 void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
 {
@@ -26,11 +26,8 @@ void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
 		ft_printf("%c", i);
 		bit = 0;
 		i = 0;
+		kill(siginfo->si_pid, SIGUSR1);
 	}
-	if (siginfo->si_pid == 0)
-		solve_errors("Error in PID'S client! Put the rigth PID!");
-	if (kill(siginfo->si_pid, SIGUSR1))
-		solve_errors("Error in signal!");
 }
 
 int	main(void)
@@ -40,7 +37,7 @@ int	main(void)
 	ft_printf("PID: %d\n", getpid());
 	sigemptyset(&signal.sa_mask);
 	signal.sa_flags = SA_SIGINFO;
-	signal.sa_sigaction = server_handler;
+	signal.sa_sigaction = &server_handler;
 	if ((sigaction(SIGUSR1, &signal, NULL)) == -1)
 		solve_errors("Error Signal: SIGUSR1\n");
 	if ((sigaction(SIGUSR2, &signal, NULL)) == -1)

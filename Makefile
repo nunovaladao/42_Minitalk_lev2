@@ -6,11 +6,9 @@
 #    By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 17:21:32 by nsoares-          #+#    #+#              #
-#    Updated: 2023/02/20 19:28:36 by nsoares-         ###   ########.fr        #
+#    Updated: 2023/02/21 23:37:25 by nsoares-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-NAME = 
 
 CLIENT = client
 SERVER = server
@@ -18,7 +16,7 @@ CLIENT_BONUS = client_bonus
 SERVER_BONUS = server_bonus
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g 
+CFLAGS = -Wall -Wextra -Werror -g0 
 RM = rm -rf
 LIBFT = ./libft/libft.a
 
@@ -55,30 +53,29 @@ CLEANED		=	echo "\n$(BOLD_YELLOW)Clean: $(NO_COLOR)Removed all the \".o\" files 
 
 FCLEANED	=	echo "\n$(BOLD_YELLOW)Fclean: $(NO_COLOR)Removed the executables \n"
 
+RE          =   echo "\n$(BOLD_YELLOW)Re: $(NO_COLOR)Compilation restarted \n"
+
 # __________RULES______________
 
 all: compilation_start $(SERVER) $(CLIENT)
 
-$(NAME): all 
-
 compilation_start:
 	@ $(COMPILATION_START)
 	
-
 $(SERVER): $(LIBFT) $(OBJS_SER)
-	@ $(CC) $(CFLAGS) $(SERVER_FILE) $(LIBFT) -o $(SERVER)
+	@ $(CC) $(CFLAGS) $(SERVER_FILE) $(LIBFT) -o $@
 	@ $(SERVER_READY)
 
 $(CLIENT): $(LIBFT) $(OBJS_CLI)
-	@ $(CC) $(CFLAGS) $(CLIENT_FILE) $(LIBFT) -o $(CLIENT)
+	@ $(CC) $(CFLAGS) $(CLIENT_FILE) $(LIBFT) -o $@
 	@ $(CLIENT_READY)	
 
 $(SERVER_BONUS): $(LIBFT) $(OBJS_SER_BONUS)
-	@ $(CC) $(CFLAGS) $(SERVER_BFILE) $(LIBFT) -o $(SERVER_BONUS)
+	@ $(CC) $(CFLAGS) $(SERVER_BFILE) $(LIBFT) -o $@
 	@ $(SERVER_READY)
 
 $(CLIENT_BONUS): $(LIBFT) $(OBJS_CLI_BONUS)
-	@ $(CC) $(CFLAGS) $(CLIENT_BFILE) $(LIBFT) -o $(CLIENT_BONUS)
+	@ $(CC) $(CFLAGS) $(CLIENT_BFILE) $(LIBFT) -o $@
 	@ $(CLIENT_READY)
 
 $(LIBFT):
@@ -96,6 +93,7 @@ fclean: clean
 	@ cd libft && make fclean
 	@ $(FCLEANED)
 
-bonus: $(SERVER_BONUS) $(CLIENT_BONUS)
+bonus: compilation_start $(SERVER_BONUS) $(CLIENT_BONUS)
 		
-re:	fclean all bonus
+re:	fclean all
+	@$(RE)

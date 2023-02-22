@@ -6,11 +6,11 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:16 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/20 19:16:54 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:55:53 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk_bonus.h"
+#include "minitalk.h"
 
 int g_message_count = 0;
 

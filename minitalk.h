@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:30 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/13 15:39:56 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:31:56 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/libft.h"
 # include <signal.h>
-# include <sys/types.h>
+# include <sys/types.h> 
+# include <unistd.h>
 
 #endif
