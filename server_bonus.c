@@ -6,13 +6,39 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:34 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/21 23:14:38 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/22 23:31:24 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
+char *g_send_message = 0;
+
 void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
+{
+	static int	bit;
+	static unsigned char	i;
+
+	(void)nothing;
+	if (sig == SIGUSR1)
+		i += (128 >> bit);
+	bit++;
+	if (bit == 8)
+	{
+		g_send_message = ft_minitalk_strjoin(g_send_message, i);
+		if (i == '\0')
+		{
+			ft_printf("%s", g_send_message);
+			free(g_send_message);
+			g_send_message = 0;
+			kill(siginfo->si_pid, SIGUSR1);
+		}
+		bit = 0;
+		i = 0;
+	}
+}
+
+/* void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
 {
 	static int	bit;
 	static int	i;
@@ -28,7 +54,7 @@ void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
 		i = 0;
 		kill(siginfo->si_pid, SIGUSR1);
 	}
-}
+} */
 
 int	main(void)
 {

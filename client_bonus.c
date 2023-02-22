@@ -6,13 +6,11 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:16 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/21 16:55:53 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/22 23:31:48 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
-int	g_message_count = 0;
 
 void	send_string(pid_t pid, char *string)
 {
@@ -39,7 +37,8 @@ void	send_string(pid_t pid, char *string)
 void	client_handler(int sig)
 {
 	if (sig == SIGUSR1)
-		g_message_count++;
+		ft_printf("The message has been received!\n");
+
 }
 
 int	main(int argc, char **argv)
@@ -56,11 +55,7 @@ int	main(int argc, char **argv)
 	if (!ft_atoi(argv[1]) || ft_atoi(argv[1]) < 0)
 		solve_errors("PID error!\n");
 	if (argc == 3)
-	{
 		send_string(ft_atoi(argv[1]), argv[2]);
-		ft_printf("The message has been received \
-		[%d] times!\n", g_message_count);
-	}
 	else
 		solve_errors("Wrong args!\n");
 }

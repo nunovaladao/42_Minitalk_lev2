@@ -34,7 +34,7 @@ int main(int ac, char **av)
     print_bits(octec);
 } */
 
-int main()
+/* int main()
 {
 	int binary_table[8] = {128, 64, 32, 16, 8, 4, 2, 1};
 	int converted = 0;
@@ -50,7 +50,7 @@ int main()
 	}
 	write(1, &converted, 1);
 	write(1, "\n", 1);
-}
+} */
 
 /* #include <unistd.h>
 #include <stdio.h>
@@ -79,3 +79,17 @@ int main()
     return 0;
 } */
 
+int main()
+{
+    int a = 2;
+    int b = 1;
+
+    int res = a | (b << 1);
+
+    // 00000010
+   //  00000001
+  // -------------
+//re-> 00000011
+
+    printf("%d", res);
+}
