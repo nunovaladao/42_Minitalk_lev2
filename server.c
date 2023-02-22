@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:17:44 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/20 19:42:00 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:25:53 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
 		ft_printf("%c", i);
 		bit = 0;
 		i = 0;
+		kill(siginfo->si_pid, SIGUSR1);
 	}
-	if (siginfo->si_pid == 0)
-		solve_errors("Error in PID'S client! Put the rigth PID!");
-	if (kill(siginfo->si_pid, SIGUSR1))
-		solve_errors("Error in signal!");
 }
 
 int	main(void)
