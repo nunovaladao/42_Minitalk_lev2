@@ -6,7 +6,7 @@
 #    By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 17:21:32 by nsoares-          #+#    #+#              #
-#    Updated: 2023/02/21 23:37:25 by nsoares-         ###   ########.fr        #
+#    Updated: 2023/02/23 17:19:21 by nsoares-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,9 @@ RE          =   echo "\n$(BOLD_YELLOW)Re: $(NO_COLOR)Compilation restarted \n"
 
 # __________RULES______________
 
-all: compilation_start $(SERVER) $(CLIENT)
+all: $(SERVER) $(CLIENT)
+
+$(NAME): all compilation_start
 
 compilation_start:
 	@ $(COMPILATION_START)

@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 23:35:31 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/22 23:40:21 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/23 18:31:28 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ char *ft_minitalk_strjoin(char *str, char c)
         new[i] = str[i];
     new[i++] = c;
     new[i] = '\0';
-    free(str);
+    //free(str);
     return (new);
 }

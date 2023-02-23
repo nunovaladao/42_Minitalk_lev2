@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:34 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/22 23:31:24 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/23 18:44:00 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,24 @@
 
 char *g_send_message = 0;
 
+// Manda logo a string!
+
 void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
 {
-	static int	bit;
-	static unsigned char	i;
+	static int	bit_count = 0;
+	unsigned char	bit;
+	static char	c = 0;
 
+	bit = 0;
 	(void)nothing;
 	if (sig == SIGUSR1)
-		i += (128 >> bit);
-	bit++;
+		bit = 1;
+	c |= (bit << bit_count);
+	bit_count++;
 	if (bit == 8)
 	{
-		g_send_message = ft_minitalk_strjoin(g_send_message, i);
-		if (i == '\0')
+		g_send_message = ft_minitalk_strjoin(g_send_message, c);
+		if (c == '\0')
 		{
 			ft_printf("%s", g_send_message);
 			free(g_send_message);
@@ -34,9 +39,11 @@ void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
 			kill(siginfo->si_pid, SIGUSR1);
 		}
 		bit = 0;
-		i = 0;
+		c = 0;
 	}
 }
+
+// Caracter a caracter!
 
 /* void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
 {
@@ -45,7 +52,7 @@ void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
 
 	(void)nothing;
 	if (sig == SIGUSR1)
-		i += (128 >> bit);
+		i |= (0b10000000 >> bit);
 	bit++;
 	if (bit == 8)
 	{

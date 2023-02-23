@@ -79,17 +79,31 @@ int main()
     return 0;
 } */
 
+
+
 int main()
 {
-    int a = 2;
-    int b = 1;
-
-    int res = a | (b << 1);
-
-    // 00000010
-   //  00000001
-  // -------------
-//re-> 00000011
+    
+    char sig = 'a'; //01100001
+    int ksam = 1;   //00000001
+    int i = 0;
+//    int j = 0;
+    int res = 0;
+    int sum = 0;
+    int mask = 0b10000000;
+    
+    while (i < 8)
+    {
+        sum = (sig & (ksam << i++));
+        printf("%d\n", sum);
+        res |= (mask >> i) | sig;
+        printf("%d\n", res);
+    }
+        
+// mask 10000000
+//  sig 00000001
+// -------------
+//res-> 10000001
 
     printf("%d", res);
 }
