@@ -6,7 +6,7 @@
 #    By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 21:41:21 by nsoares-          #+#    #+#              #
-#    Updated: 2023/02/22 23:40:52 by nsoares-         ###   ########.fr        #
+#    Updated: 2023/02/24 14:38:40 by nsoares-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC = ft_isascii.c ft_isprint.c ft_isalpha.c ft_isdigit.c ft_isalnum.c \
 		        ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
 		        print_char.c print_hex.c print_int.c print_ptr.c ft_utoa.c\
 			print_str.c print_unsigned.c ft_printf.c ft_gnl_strjoin.c ft_gnl_strchr.c \
-			get_next_line.c solve_errors.c ft_minitalk_strjoin.c
+			get_next_line.c solve_errors.c 
 
 OBJ = $(SRC:.c=.o)
 

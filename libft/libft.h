@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:27:45 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/22 23:40:29 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:38:21 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,5 @@ char	*ft_gnl_strjoin(char *s1, char *s2);
 char	*ft_gnl_strchr(char *s, int c);
 
 void	solve_errors(char *str);
-char *ft_minitalk_strjoin(char *str, char c);
 
 #endif

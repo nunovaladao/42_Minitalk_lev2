@@ -6,62 +6,29 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:34 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/23 18:44:00 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:01:06 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-char *g_send_message = 0;
-
-// Manda logo a string!
-
 void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
 {
-	static int	bit_count = 0;
-	unsigned char	bit;
-	static char	c = 0;
-
-	bit = 0;
-	(void)nothing;
-	if (sig == SIGUSR1)
-		bit = 1;
-	c |= (bit << bit_count);
-	bit_count++;
-	if (bit == 8)
-	{
-		g_send_message = ft_minitalk_strjoin(g_send_message, c);
-		if (c == '\0')
-		{
-			ft_printf("%s", g_send_message);
-			free(g_send_message);
-			g_send_message = 0;
-			kill(siginfo->si_pid, SIGUSR1);
-		}
-		bit = 0;
-		c = 0;
-	}
-}
-
-// Caracter a caracter!
-
-/* void	server_handler(int sig, siginfo_t *siginfo, void *nothing)
-{
 	static int	bit;
-	static int	i;
+	static unsigned char	c;
 
 	(void)nothing;
 	if (sig == SIGUSR1)
-		i |= (0b10000000 >> bit);
+		c |= (0b10000000 >> bit);
 	bit++;
 	if (bit == 8)
 	{
-		ft_printf("%c", i);
+		ft_printf("%c", c);
 		bit = 0;
-		i = 0;
+		c = 0;
 		kill(siginfo->si_pid, SIGUSR1);
 	}
-} */
+}
 
 int	main(void)
 {

@@ -6,15 +6,17 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:16 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/23 17:48:50 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:09:11 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
+int g_message_count = 0;
+
 void	send_string(pid_t pid, char *string)
 {
-	char	c;
+	unsigned char	c;
 	int		bits;
 
 	while (*string)
@@ -37,13 +39,13 @@ void	send_string(pid_t pid, char *string)
 void	client_handler(int sig)
 {
 	if (sig == SIGUSR1)
-		ft_printf("The message has been received!\n");
-
+		g_message_count++;
 }
 
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
 	struct sigaction	signal;
+	pid_t	pid;
 
 	sigemptyset(&signal.sa_mask);
 	signal.sa_flags = SA_SIGINFO;
@@ -52,10 +54,12 @@ int	main(int argc, char **argv)
 		solve_errors("Error Client Signal\n");
 	if ((sigaction(SIGUSR2, &signal, 0)) == -1)
 		solve_errors("Error Client Signal\n");
-	if (!ft_atoi(argv[1]) || ft_atoi(argv[1]) < 0)
-		solve_errors("PID error!\n");
-	if (argc == 3)
-		send_string(ft_atoi(argv[1]), argv[2]);
+	pid = ft_atoi(av[1]);
+	if (ac == 3)
+	{
+		send_string(pid, av[2]);
+		ft_printf("The message has been received [%d] times!\n", g_message_count);
+	}
 	else
 		solve_errors("Wrong args!\n");
 }
