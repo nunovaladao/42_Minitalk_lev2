@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:34 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/24 15:01:06 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:11:11 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ int	main(void)
 	sigemptyset(&signal.sa_mask);
 	signal.sa_flags = SA_SIGINFO;
 	signal.sa_sigaction = &server_handler;
-	if ((sigaction(SIGUSR1, &signal, NULL)) == -1)
-		solve_errors("Error Signal: SIGUSR1\n");
-	if ((sigaction(SIGUSR2, &signal, NULL)) == -1)
-		solve_errors("Error Signal: SIGUSR2\n");
+	sigaction(SIGUSR1, &signal, NULL);
+	sigaction(SIGUSR2, &signal, NULL);
 	while (1)
 		pause();
 	return (0);

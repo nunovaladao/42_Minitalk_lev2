@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:16 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/24 15:09:11 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/24 17:31:13 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ int	main(int ac, char **av)
 	sigemptyset(&signal.sa_mask);
 	signal.sa_flags = SA_SIGINFO;
 	signal.sa_handler = &client_handler;
-	if ((sigaction(SIGUSR1, &signal, 0)) == -1)
-		solve_errors("Error Client Signal\n");
-	if ((sigaction(SIGUSR2, &signal, 0)) == -1)
-		solve_errors("Error Client Signal\n");
+	sigaction(SIGUSR1, &signal, 0);
+	sigaction(SIGUSR2, &signal, 0);
 	pid = ft_atoi(av[1]);
 	if (ac == 3)
 	{
