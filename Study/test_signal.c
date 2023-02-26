@@ -51,8 +51,8 @@ int main()
     signal(SIGUSR1, handle_sig);
     for(int i = 1; i <= 10; i++)
 	{
-			printf("%d\n", i);
-			sleep(1);
+		printf("%d\n", i);
+		sleep(1);
 	}
 
     kill(pid, SIGUSR1);

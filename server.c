@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:17:44 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/24 16:59:55 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/26 01:29:10 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	server_handler(int sig)
 {
-	static int	bit;
-	static unsigned char	c;
+	static int	bit = 0;
+	static unsigned char	c = 0;
 
 	if (sig == SIGUSR1)
 		c |= (0b10000000 >> bit);

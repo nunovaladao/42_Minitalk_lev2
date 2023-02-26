@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:16 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/24 17:31:13 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/02/26 00:51:19 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	send_string(pid_t pid, char *string)
 		bits = 0;
 		while (bits < 8)
 		{
-			if (c & 1 << (7 - bits))
-				kill(pid, SIGUSR1);
+			if (c & 0b00000001 << (7 - bits))
+				kill(pid, SIGUSR1); // (1)
 			else
-				kill(pid, SIGUSR2);
+				kill(pid, SIGUSR2); // (0)
 			usleep(40);
 			bits++;
 		}
@@ -47,11 +47,11 @@ int	main(int ac, char **av)
 	struct sigaction	signal;
 	pid_t	pid;
 
-	sigemptyset(&signal.sa_mask);
-	signal.sa_flags = SA_SIGINFO;
+	/* sigemptyset(&signal.sa_mask);  { Não sei se é preciso!!
+	signal.sa_flags = SA_SIGINFO; */
 	signal.sa_handler = &client_handler;
-	sigaction(SIGUSR1, &signal, 0);
-	sigaction(SIGUSR2, &signal, 0);
+	sigaction(SIGUSR1, &signal, NULL);
+	sigaction(SIGUSR2, &signal, NULL);
 	pid = ft_atoi(av[1]);
 	if (ac == 3)
 	{
