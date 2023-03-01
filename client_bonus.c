@@ -6,18 +6,18 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:18:16 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/02/26 00:51:19 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:45:43 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int g_message_count = 0;
+int	g_message_count = 0;
 
 void	send_string(pid_t pid, char *string)
 {
 	unsigned char	c;
-	int		bits;
+	int				bits;
 
 	while (*string)
 	{
@@ -26,9 +26,9 @@ void	send_string(pid_t pid, char *string)
 		while (bits < 8)
 		{
 			if (c & 0b00000001 << (7 - bits))
-				kill(pid, SIGUSR1); // (1)
+				kill(pid, SIGUSR1);
 			else
-				kill(pid, SIGUSR2); // (0)
+				kill(pid, SIGUSR2);
 			usleep(40);
 			bits++;
 		}
@@ -45,10 +45,10 @@ void	client_handler(int sig)
 int	main(int ac, char **av)
 {
 	struct sigaction	signal;
-	pid_t	pid;
+	pid_t				pid;
 
-	/* sigemptyset(&signal.sa_mask);  { Não sei se é preciso!!
-	signal.sa_flags = SA_SIGINFO; */
+	sigemptyset(&signal.sa_mask);
+	signal.sa_flags = SA_SIGINFO;
 	signal.sa_handler = &client_handler;
 	sigaction(SIGUSR1, &signal, NULL);
 	sigaction(SIGUSR2, &signal, NULL);
@@ -56,7 +56,8 @@ int	main(int ac, char **av)
 	if (ac == 3)
 	{
 		send_string(pid, av[2]);
-		ft_printf("The message has been received [%d] times!\n", g_message_count);
+		ft_printf("The message has been received [%d] times!\n"\
+		, g_message_count);
 	}
 	else
 		solve_errors("Wrong args!\n");

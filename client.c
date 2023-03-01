@@ -15,7 +15,7 @@
 void	send_string(pid_t pid, char *string)
 {
 	unsigned char	c;
-	int		bits;
+	int				bits;
 
 	while (*string)
 	{
