@@ -34,7 +34,7 @@ or *(if you want the bonus part - `make bonus`)*
 #### 3 - Run the server 
 
 ```bash
-  ./server <PID>
+  ./server
 ```
 
 #### 4 - Run the client 
