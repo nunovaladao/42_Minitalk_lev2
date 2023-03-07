@@ -4,8 +4,8 @@
 This project is about to creating a ***communication program*** in the form of a client and a server. 
 
 #### In this project I learned:
-- working with unix signals;
-- and doing bitwise operations;
+- working with **unix signals**;
+- and doing **bitwise operations**;
 
 
 ## GRADE PROJECT ✅
