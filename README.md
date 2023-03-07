@@ -37,7 +37,8 @@ or *(if you want the bonus part - `make bonus`)*
   ./server <PID>
 ```
 
-#### 4 - Now put the same pid between `./client` and the `message` you want to send 
+#### 4 - Run the client 
+Now put the same pid between `./client` and the `message` you want to send 
 
 ```bash
   ./client <SERVER_PID> <message>
